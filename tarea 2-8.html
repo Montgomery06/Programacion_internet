@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Canvas
+	</title>
+	<style type="text/css">
+		.container{
+			width: 80%;
+			background-color: white;
+			margin: auto;
+			min-height: 500px;
+		} 
+		img{
+			visibility: hidden;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<canvas id="canvas" width="400" height="500">
+			Opps tu navegador no soporta CANVAS
+		</canvas>
+		<img id="grito" src="https://johnbriner.files.wordpress.com/2011/02/the-scream.jpeg">
+	</div>
+	<script type="text/javascript">
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			if (canvas.getContext) {
+				var ctx = canvas.getContext('2d');
+
+				var img = document.getElementById('grito');
+				ctx.drawImage(img,0,0);
+
+			}
+		}	 
+	</script>
+</body>
+</html>
