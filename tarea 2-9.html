@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Canvas
+	</title>
+	<style type="text/css">
+		.container{
+			width: 80%;
+			background-color: white;
+			margin: auto;
+			min-height: 500px;
+		} 
+		
+	</style>
+</head>
+<body>
+	<div class="container">
+		<canvas id="canvas" width="600" height="500">
+			Opps tu navegador no soporta CANVAS
+		</canvas>
+	</div>
+	<script type="text/javascript">
+
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			if (canvas.getContext) {
+				var ctx = canvas.getContext('2d');
+
+
+				
+
+				
+				 ctx.fillStyle = "rgb(128,128,128)";
+				 ctx.fillRect (121,125, 60, 120);
+				 ctx.fillRect (181,125, 110, 25);
+				 ctx.fillRect (91,125, 30, 15);
+				 ctx.fillRect (91,125, 25, 100);
+
+
+				 ctx.fillStyle = "rgb(0,0,255)";
+				 ctx.fillRect (121,245, 60, 30);
+				 ctx.fillRect (121,245, 25, 120);
+				 ctx.fillRect (156,245, 25, 120);
+
+				 ctx.beginPath();
+				 ctx.fillStyle = "black";
+				 ctx.arc(150, 90, 30, 0, 2 * Math.PI);
+				 ctx.fill();
+				 ctx.closePath();
+
+				 	
+				 ctx.beginPath();
+				 ctx.fillStyle = "rgb(128,0,0)";
+				 ctx.arc(150, 100, 30, 0, 2 * Math.PI);
+				 ctx.fill();
+				 ctx.closePath();
+
+				 ctx.beginPath();
+				 ctx.arc(290, 137, 15, 0, 2 * Math.PI);
+				 ctx.fill();
+				 ctx.closePath();
+
+				 ctx.beginPath();
+				 ctx.arc(103, 235, 15, 0, 2 * Math.PI);
+				 ctx.fill();
+				 ctx.closePath();
+
+				ctx.fillStyle = "black";
+	 			ctx.font = "10px Arial";
+				ctx.fillText("Hello World",125,170);
+
+				ctx.fillRect (156,360, 30, 15);
+				ctx.fillRect (116,360, 30, 15);
+
+				ctx.beginPath();
+				ctx.arc(140,95, 5, 0, 2 * Math.PI);
+				ctx.fill();
+				ctx.closePath();
+
+				ctx.beginPath();
+				ctx.arc(160,95, 5, 0, 2 * Math.PI);
+				ctx.fill();
+				ctx.closePath();
+
+				ctx.beginPath();
+				ctx.moveTo(145,115);
+			 	ctx.lineTo(155,115);
+			 	ctx.stroke();
+
+
+
+			}
+		}	 
+	</script>
+</body>
+</html>
