@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Canvas
+	</title>
+	<style type="text/css">
+		.container{
+			width: 80%;
+			background-color: white;
+			margin: auto;
+			min-height: 500px;
+		} 
+		
+	</style>
+</head>
+<body>
+	<div class="container">
+		<canvas id="canvas" width="400" height="500">
+			Opps tu navegador no soporta CANVAS
+		</canvas>
+	</div>
+	<script type="text/javascript">
+		var flag = true;
+
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			if (canvas.getContext) {
+				var ctx = canvas.getContext('2d');
+
+				canvas.addEventListener('mousemove',function (evt){
+					if(!flag){
+
+					ctx.fillStyle = "rgb(255,0,0)";
+				 	ctx.fillRect (evt.offsetX, evt.offsetY, 15, 15);
+
+				 	}
+
+					
+				})
+
+				canvas.addEventListener('mouseup',function (evt){
+					flag = true;
+				})
+
+				canvas.addEventListener('mousedown',function (evt){
+					flag = false;
+					
+				})
+
+			}
+		}	 
+	</script>
+</body>
+</html>
