@@ -75,12 +75,7 @@
 				walls[i].paint(ctx);
 			}
 
-			for (var i = walls.length - 1; i >= 0; i--) {
-				if (player.intersects(walls[i])) {
-				  	console.log("perdiste");
-				}
-				
-			}
+
 
 			ctx.font = "20px Arial";
 			ctx.fillText("Puntos: " + puntos ,10,20);
@@ -129,6 +124,13 @@
 				food.x = random(canvas.width-10);
 				food.y = random(canvas.height-10);
 				puntos++;
+			}
+
+			for (var i = walls.length - 1; i >= 0; i--) {
+				if (player.intersects(walls[i])) {
+				  	console.log("perdiste");
+				}
+				
 			}
 		  }
 		}
