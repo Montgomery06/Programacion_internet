@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Canvas
+	</title>
+	<style type="text/css">
+		.container{
+			width: 80%;
+			margin: auto;
+			min-height: 200px;
+		} 
+		canvas{
+			background-color: #F7D358;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<canvas id="canvas" width="380" height="300">
+			Opps tu navegador no soporta CANVAS
+		</canvas>
+
+	</div>
+	<script type="text/javascript">
+		var canvas = null, ctx = null,x=0,y=140; 
+		var speed = 5;
+		var player = null, win = null, walls = Array();
+		var puntos = 0, pos = 2 ;
+		var pausa = true;
+		var player_body  = new Image(), win_body = new Image();
+		var game = new Audio() , victori = new Audio()  , pause = new Audio();
+
+
+
+		window.requestAnimationFrame = (function(){
+			return window.requestAnimationFrame || 
+				window.mozRequestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				function (callback){
+					window.setTimeout(callback,17);
+				}
+		}());
+
+		function Rectangle(x,y,w,h,c){
+			this.x=x;
+			this.y=y;
+			this.w=w;
+			this.h=h;
+			this.c=c;
+
+			this.paint =function(ctx){
+				ctx.fillStyle=this.c;
+				ctx.fillRect(this.x,this.y,this.w,this.h);
+			}
+
+			this.intersects = function(target){
+				if( this.x < target.x + target.w  && 
+					this.x + this.w > target.x    &&
+					this.y < target.y + target.h  &&
+					this.y + this.h > target.y){
+					return true;
+				}
+			}
+		}
+
+		function paint(ctx)
+		{
+			ctx.fillStyle = "#000";
+			ctx.fillRect(0,0,canvas.width,canvas.height);
+
+			player.paint(ctx); 
+
+			win.paint(ctx);
+
+
+			for (var i = walls.length - 1; i >= 0; i--) {
+				walls[i].paint(ctx);
+			}
+
+			ctx.drawImage(player_body,player.x,player.y);
+			
+			if(!pausa){
+				ctx.font = "20px Arial";
+				ctx.fillStyle = "#00ffff";
+				ctx.fillText("Pausa" ,150,285);
+			}
+		}
+
+		function upt(){
+
+			if(!pausa){
+
+			}else{
+			
+			
+			if (player.intersects(win)) {
+				victori.play();
+				alert("Ganaste");x
+				pausa = false;
+				location.reload();
+			}
+
+			for (var i = walls.length - 1; i >= 0; i--) {
+				if (player.intersects(walls[i])) {  
+
+					switch(pos){
+					case 1:
+					player.x -= speed;	
+					break;
+
+					case 2:
+					player.x += speed;
+
+					break;
+					case 3: 
+					player.y -= speed;
+
+					break;
+
+					case 4:
+					 player.y +=speed;
+
+					break;
+					} 
+				}
+			}
+		  }
+		}
+
+		function run(){
+			window.requestAnimationFrame(run)
+			upt();
+			paint(ctx);
+			
+		}
+
+		function init(){
+			canvas = document.getElementById('canvas');
+			ctx = canvas.getContext('2d');
+
+			game.src = "rocky.mp3";
+			victori.src = "ringtones-star-wars.mp3";
+			pause.src = "juego-de-tronos-1.mp3";
+			
+
+		    player_body.src = "iu-4-2.png";
+			
+			player = new Rectangle(x,y,1,1,"yellow")
+			win = new Rectangle(370,60,10,10,"red");
+			
+			walls.push(new Rectangle(0,0,370,10,"gray"));
+			walls.push(new Rectangle(370,0,10,60,"gray"));
+			walls.push(new Rectangle(370,70,10,190,"gray"));
+			walls.push(new Rectangle(0,250,370,10,"gray"));
+			walls.push(new Rectangle(0,150,10,100,"gray"));
+			walls.push(new Rectangle(0,0,10,140,"gray"));
+
+
+			walls.push(new Rectangle(20,10,10,30,"gray"));
+			walls.push(new Rectangle(60,10,10,30,"gray"));
+			walls.push(new Rectangle(120,10,10,10,"gray"));
+			walls.push(new Rectangle(160,10,10,30,"gray"));
+			walls.push(new Rectangle(200,10,10,30,"gray"));
+			walls.push(new Rectangle(270,10,10,20,"gray"));
+			walls.push(new Rectangle(310,10,10,100,"gray"));
+			walls.push(new Rectangle(330,20,40,10,"gray"));
+			walls.push(new Rectangle(10,50,120,10,"gray"));
+			walls.push(new Rectangle(40,20,10,30,"gray"));
+			walls.push(new Rectangle(80,40,10,10,"gray"));
+			walls.push(new Rectangle(60,20,40,10,"gray"));
+			walls.push(new Rectangle(100,20,10,20,"gray"));
+			walls.push(new Rectangle(110,30,30,10,"gray"));
+			walls.push(new Rectangle(140,20,10,100,"gray"));
+			walls.push(new Rectangle(140,50,40,10,"gray"));
+			walls.push(new Rectangle(180,20,10,40,"gray"));
+			walls.push(new Rectangle(190,50,20,10,"gray"));
+			walls.push(new Rectangle(200,60,10,10,"gray"));
+			walls.push(new Rectangle(200,70,20,10,"gray"));
+			walls.push(new Rectangle(220,40,10,40,"gray"));
+			walls.push(new Rectangle(200,20,40,10,"gray"));
+			walls.push(new Rectangle(220,40,70,10,"gray"));
+			walls.push(new Rectangle(250,20,10,20,"gray"));
+			walls.push(new Rectangle(290,20,10,30,"gray"));
+			walls.push(new Rectangle(20,70,50,10,"gray"));
+			walls.push(new Rectangle(60,70,10,100,"gray"));
+			walls.push(new Rectangle(80,50,10,50,"gray"));
+			walls.push(new Rectangle(100,70,50,10,"gray"));
+			walls.push(new Rectangle(160,70,30,10,"gray"));
+			walls.push(new Rectangle(180,70,10,60,"gray"));
+			walls.push(new Rectangle(180,90,60,10,"gray"));
+			walls.push(new Rectangle(240,60,10,40,"gray"));
+			walls.push(new Rectangle(250,60,10,10,"gray"));
+			walls.push(new Rectangle(260,60,10,70,"gray"));
+			walls.push(new Rectangle(280,40,10,70,"gray"));
+			walls.push(new Rectangle(300,60,10,10,"gray"));
+			walls.push(new Rectangle(290,80,10,10,"gray"));
+			walls.push(new Rectangle(290,100,10,10,"gray"));
+			walls.push(new Rectangle(330,40,40,10,"gray"));
+			walls.push(new Rectangle(310,60,50,10,"gray"));
+
+
+			walls.push(new Rectangle(10,90,40,10,"gray"));
+			walls.push(new Rectangle(20,110,40,10,"gray"));
+			walls.push(new Rectangle(40,110,10,70,"gray"));
+			walls.push(new Rectangle(20,110,10,120,"gray"));
+			walls.push(new Rectangle(20,230,110,10,"gray"));
+			walls.push(new Rectangle(120,120,10,120,"gray"));
+			walls.push(new Rectangle(120,80,10,30,"gray"));
+			walls.push(new Rectangle(100,90,20,10,"gray"));
+			walls.push(new Rectangle(120,130,40,10,"gray"));
+
+
+			walls.push(new Rectangle(80,110,50,10,"gray"));
+			walls.push(new Rectangle(70,130,40,10,"gray"));
+			walls.push(new Rectangle(80,150,50,10,"gray"));
+			walls.push(new Rectangle(60,170,20,10,"gray"));
+			walls.push(new Rectangle(90,170,20,10,"gray"));
+			walls.push(new Rectangle(100,170,10,50,"gray"));
+			walls.push(new Rectangle(30,210,60,10,"gray"));
+			walls.push(new Rectangle(30,190,60,10,"gray"));
+			walls.push(new Rectangle(160,70,10,70,"gray"));
+			walls.push(new Rectangle(140,150,10,80,"gray"));
+			walls.push(new Rectangle(140,150,230,10,"gray"));
+			walls.push(new Rectangle(140,230,80,10,"gray"));
+			walls.push(new Rectangle(180,130,40,10,"gray"));
+			walls.push(new Rectangle(200,110,10,30,"gray"));
+			walls.push(new Rectangle(200,110,50,10,"gray"));
+			walls.push(new Rectangle(280,110,10,20,"gray"));
+			walls.push(new Rectangle(280,120,70,10,"gray"));
+			walls.push(new Rectangle(280,140,10,10,"gray"));
+			walls.push(new Rectangle(300,130,10,10,"gray"));
+			walls.push(new Rectangle(320,140,10,10,"gray"));
+			walls.push(new Rectangle(340,130,10,10,"gray"));
+			walls.push(new Rectangle(340,60,10,50,"gray"));
+			walls.push(new Rectangle(360,130,10,10,"gray"));
+			walls.push(new Rectangle(360,110,10,10,"gray"));
+			walls.push(new Rectangle(360,90,10,10,"gray"));
+			walls.push(new Rectangle(320,90,10,10,"gray"));
+			walls.push(new Rectangle(330,70,10,10,"gray"));
+			walls.push(new Rectangle(230,130,40,10,"gray"));
+
+
+			walls.push(new Rectangle(160,150,10,70,"gray"));
+			walls.push(new Rectangle(180,150,10,70,"gray"));
+			walls.push(new Rectangle(200,150,10,70,"gray"));
+			walls.push(new Rectangle(220,150,10,70,"gray"));
+
+			walls.push(new Rectangle(240,170,70,10,"gray"));
+			walls.push(new Rectangle(240,190,70,10,"gray"));
+			walls.push(new Rectangle(240,210,70,10,"gray"));
+			walls.push(new Rectangle(230,230,70,10,"gray"));
+
+
+			walls.push(new Rectangle(320,170,40,10,"gray"));
+			walls.push(new Rectangle(320,190,40,10,"gray"));
+			walls.push(new Rectangle(320,210,40,10,"gray"));
+			
+			walls.push(new Rectangle(310,230,50,10,"gray"));
+
+
+
+			run();
+		}
+
+		window.addEventListener('load',init,false);  
+
+		document.addEventListener('keydown',function(e){
+			switch(e.keyCode) {
+	        case 37:
+	            pos = 2;
+
+				game.play();
+
+	            if(player.x > 0 && pausa)
+	            player.x -= speed;
+
+	        	
+	            break;
+	        case 38:
+	            pos = 4;
+
+	            game.play();
+
+	            if(pausa)
+	            player.y -=speed;
+
+
+	            break;
+	        case 39:
+	            pos = 1;
+
+	            game.play();
+
+	            if(pausa)
+	            player.x += speed;
+
+	            break;
+	        case 40:
+	            pos = 3;
+
+	            game.play();
+
+	            if(pausa)
+	            player.y += speed;
+
+	            break;
+	        case 32:
+	        	if(!pausa){
+	        		pausa = true;
+	        		
+	        	}else{
+	        		pausa = false;
+					pause.play();
+				}
+	        	break;
+	    	}
+		 })
+
+
+	</script>
+</body>
+</html>
