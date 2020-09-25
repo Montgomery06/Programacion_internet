@@ -36,8 +36,81 @@
 	  		</ol>
 		</nav>
 
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+ 			 Unirse
+		</button>
+
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Formulario de registro</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div> 
+		      <form action="" method="Post" onsubmit="return validateRegister()">
+		      <div class="modal-body">
+
+		      	<label for="basic-url">Nombre</label>
+		      	<div class="input-group mb-3"> 
+				  <div class="input-group-prepend"> 
+				    <span class="input-group-text" id="basic-addon1">
+				    	<i class="fas fa-user"></i>
+				    </span>
+				  </div>
+				  <input type="text" class="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" required="">
+				</div>
+
+				<label for="basic-url">Apellido</label>
+		      	<div class="input-group mb-3"> 
+				  <div class="input-group-prepend"> 
+				    <span class="input-group-text" id="basic-addon2">				    	
+				    	<i class="fas fa-user"></i>
+				</span>
+				  </div>
+				  <input type="text" class="form-control" placeholder="Apellido" aria-label="Lastname" aria-describedby="basic-addon2" required="">
+				</div>
+
+				<label for="basic-url">Correo</label>
+		      	<div class="input-group mb-3"> 
+				  <div class="input-group-prepend"> 
+				    <span class="input-group-text" id="basic-addon3"><i class="fas fa-envelope"></i></span>
+				  </div>
+				  <input type="text" class="form-control" name="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon3" required="">
+				</div>
+	
+				<label for="basic-url">Contraseña</label>
+		      	<div class="input-group mb-3"> 
+				  <div class="input-group-prepend"> 
+				    <span class="input-group-text" id="basic-addon4"><i class="fas fa-lock"></i></span>
+				  </div>
+				  <input type="password" class="form-control" id="password" name="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon4" required="">
+				</div>
+
+				<label for="basic-url">Repetir contraseña</label>
+		      	<div class="input-group mb-3"> 
+				  <div class="input-group-prepend"> 
+				    <span class="input-group-text" id="basic-addon5"><i class="fas fa-lock"></i></span>
+				  </div>
+				  <input type="password" class="form-control" id="password2" name="password2" placeholder="Password" aria-label="Password" aria-describedby="basic-addon5" required="">
+				</div>
+
+
+
+				<div class="modal-footer">
+       				 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+    			    <button type="submit" class="btn btn-primary">Guardar</button>
+     			 </div>
+		      </div>
+		      	</form>
+		    </div>
+		</div>
+
 	</div>
 
+	
+	<!--
 	<div class="container"> 
 	
 
@@ -79,7 +152,7 @@
 		</div>
 
 			<div class="row mt-2">
-
+				<div class="card deck">
 				<div class="card mb-3" class="col-sm-4" style="max-width: 540px;">
 				  <div class="row no-gutters">
 				    <div class="col-md-4">
@@ -123,12 +196,15 @@
 				        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 				      </div>
 				    </div>
+
+					</div>
 				  </div>
 				</div>
 			</div>
 	</div>
+-->
 
-	<div class="content">
+	<div class="container">
 		<div class="row mt-2">
 		<div class="col-sm">
 		<table class="table">
@@ -138,6 +214,7 @@
 		      <th scope="col">First</th>
 		      <th scope="col">Last</th>
 		      <th scope="col">Handle</th>
+		      <th scope="col">Action</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -146,28 +223,60 @@
 		      <td>Mark</td>
 		      <td>Otto</td>
 		      <td>@mdo</td>
+		      <td>
+		      <button type="button" class="btn btn-primary">
+		      	Eliminar
+              </button>
+              <td>
 		    </tr>
 		    <tr>
 		      <th scope="row">2</th>
 		      <td>Jacob</td>
 		      <td>Thornton</td>
 		      <td>@fat</td>
+		      		      <td>
+		      <button type="button" class="btn btn-primary">
+		      	Eliminar
+              </button>
+              <td>
 		    </tr>
 		    <tr>
 		      <th scope="row">3</th>
 		      <td>Larry</td>
 		      <td>the Bird</td>
 		      <td>@twitter</td>
+		      		      <td>
+		      <button type="button" class="btn btn-primary">
+		      	Eliminar
+              </button>
+              <td>
 		    </tr>
+
+
 		  </tbody>
 		</table>
 		</div>
 		</div>
 	</div>
 
+
+
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		function validateRegister(){
+		    var password = document.getElementById('password').value
+		    var password2  = document.getElementById('password2').value
+		    if(password!=password2){
+		      alert("Las contraseñas no coinciden")
+		    return false;
+    	}  
+    
+  }
+		
+	</script>
 
 </body>
 </html>
