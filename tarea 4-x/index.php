@@ -1,8 +1,20 @@
+<?php
+	include "userController.php";
+
+	$userController = new UserController();
+
+	$users = $userController->get();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	  <link href="/css/fontawesome.css" rel="stylesheet">
+  	  <link href="/css/brands.css" rel="stylesheet">
+      <link href="/css/solid.css" rel="stylesheet">
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>
@@ -59,7 +71,7 @@
 				    	<i class="fas fa-user"></i>
 				    </span>
 				  </div>
-				  <input type="text" class="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" required="">
+				  <input type="text" class="form-control" id="name" class="name" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" required="">
 				</div>
 
 				<label for="basic-url">Apellido</label>
@@ -69,7 +81,7 @@
 				    	<i class="fas fa-user"></i>
 				</span>
 				  </div>
-				  <input type="text" class="form-control" placeholder="Apellido" aria-label="Lastname" aria-describedby="basic-addon2" required="">
+				  <input type="text" class="form-control" id="lastname" class="lastname" placeholder="Apellido" aria-label="Lastname" aria-describedby="basic-addon2" required="">
 				</div>
 
 				<label for="basic-url">Correo</label>
@@ -77,7 +89,7 @@
 				  <div class="input-group-prepend"> 
 				    <span class="input-group-text" id="basic-addon3"><i class="fas fa-envelope"></i></span>
 				  </div>
-				  <input type="text" class="form-control" name="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon3" required="">
+				  <input type="text" class="form-control" id="email" name="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon3" required="">
 				</div>
 	
 				<label for="basic-url">Contraseña</label>
@@ -234,7 +246,7 @@
 		      <td>Jacob</td>
 		      <td>Thornton</td>
 		      <td>@fat</td>
-		      		      <td>
+		      <td>
 		      <button type="button" class="btn btn-primary">
 		      	Eliminar
               </button>
@@ -245,7 +257,7 @@
 		      <td>Larry</td>
 		      <td>the Bird</td>
 		      <td>@twitter</td>
-		      		      <td>
+		      <td>
 		      <button type="button" class="btn btn-primary">
 		      	Eliminar
               </button>
@@ -266,13 +278,29 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
+		function add(){
+			$('#exampleModalLabel').text('Añadir wsuario');
+
+		}
+
+		function edit(){
+			$('#exampleModalLabel').text('Editar wsuario');
+		}
+
+
 		function validateRegister(){
 		    var password = document.getElementById('password').value
 		    var password2  = document.getElementById('password2').value
 		    if(password!=password2){
-		      alert("Las contraseñas no coinciden")
-		    return false;
-    	}  
+		      swal("Las contraseñas no coinciden", " ", "error");
+		      $('#password').addClass('is-invalid');
+		      $('#password2').addClass('is-invalid');
+		      return false;
+
+    		}else{
+
+    			return true;
+    		}  
     
   }
 		
