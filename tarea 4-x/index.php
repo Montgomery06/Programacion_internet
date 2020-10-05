@@ -3,7 +3,9 @@
 
 	$userController = new UserController();
 
-	$users = $userController->get();
+	$usuarios = $userController->get();
+
+	echo json_encode($usuarios);
 ?>
 
 <!DOCTYPE html>
@@ -48,9 +50,10 @@
 	  		</ol>
 		</nav>
 
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="add()">
  			 Unirse
 		</button>
+
 
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
@@ -61,7 +64,7 @@
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div> 
-		      <form action="" method="Post" onsubmit="return validateRegister()">
+		      <form method="Post" onsubmit="return validateRegister()" id="usuario" name="usuario">
 		      <div class="modal-body">
 
 		      	<label for="basic-url">Nombre</label>
@@ -71,7 +74,7 @@
 				    	<i class="fas fa-user"></i>
 				    </span>
 				  </div>
-				  <input type="text" class="form-control" id="name" class="name" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" required="">
+				  <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" required="">
 				</div>
 
 				<label for="basic-url">Apellido</label>
@@ -81,7 +84,7 @@
 				    	<i class="fas fa-user"></i>
 				</span>
 				  </div>
-				  <input type="text" class="form-control" id="lastname" class="lastname" placeholder="Apellido" aria-label="Lastname" aria-describedby="basic-addon2" required="">
+				  <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Apellido" aria-label="Lastname" aria-describedby="basic-addon2" required="">
 				</div>
 
 				<label for="basic-url">Correo</label>
@@ -111,6 +114,8 @@
 
 
 				<div class="modal-footer">
+					 <input type="hidden" name="action" id="action" value="add">
+					 <input type="hidden" name="id" id="id" value="">
        				 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
     			    <button type="submit" class="btn btn-primary">Guardar</button>
      			 </div>
@@ -219,59 +224,52 @@
 	<div class="container">
 		<div class="row mt-2">
 		<div class="col-sm">
-		<table class="table">
-		  <thead>
-		    <tr>
-		      <th scope="col">#</th>
-		      <th scope="col">First</th>
-		      <th scope="col">Last</th>
-		      <th scope="col">Handle</th>
-		      <th scope="col">Action</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>
-		      <button type="button" class="btn btn-primary">
-		      	Eliminar
-              </button>
-              <td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td>Jacob</td>
-		      <td>Thornton</td>
-		      <td>@fat</td>
-		      <td>
-		      <button type="button" class="btn btn-primary">
-		      	Eliminar
-              </button>
-              <td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3</th>
-		      <td>Larry</td>
-		      <td>the Bird</td>
-		      <td>@twitter</td>
-		      <td>
-		      <button type="button" class="btn btn-primary">
-		      	Eliminar
-              </button>
-              <td>
-		    </tr>
+		<table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Status</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+                <?php if (isset($usuarios) && count($usuarios)>0): ?>
+                <?php foreach ($usuarios as $usuario): ?>
+                <tr>
+                    <td><?= $usuario['name'] ?></td>
+                    <td><?= $usuario['lastname'] ?></td>
+                    <td><?= $usuario['status'] ?></td>
+                    <td>
 
 
-		  </tbody>
-		</table>
+                     
+                   
+                        <button type="button" onclick="edit('<?= $usuario['name'] ?>','<?= $usuario['lastname'] ?>','<?= $usuario['email'] ?>','<?= $usuario['password'] ?>','<?= $usuario['status'] ?>', <?= $usuario['id'] ?>)" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                          Editar
+                        </button>
+
+                        <button type="button" class="btn btn-info" onclick="remove(<?= $usuario['id'] ?>,this)" >Eliminar</button>
+                      
+                    </td> 
+                </tr>  
+                <?php endforeach ?> 
+                <?php endif ?> 
+              </tr>  
+            </tbody>
+            <tfoot>
+              <tr>
+                 <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Status</th>
+                <th>Acción</th>
+              </tr>
+            </tfoot>
+          </table>
+
 		</div>
 		</div>
 	</div>
-
-
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -279,12 +277,26 @@
 
 	<script type="text/javascript">
 		function add(){
-			$('#exampleModalLabel').text('Añadir wsuario');
+			$('.modal-title').text('Añadir usuario');
+
+			var action = document.getElementById('action') 
+		    action.value = 'add';
+
+		    document.getElementById("usuario").reset();
 
 		}
 
-		function edit(){
-			$('#exampleModalLabel').text('Editar wsuario');
+		function edit(name1,lastname1,email1,password1,id1){
+			$('.modal-title').text('Editar usuario');
+
+			    var formulario = document.usuario; 
+			    formulario.name.value = name1;
+			    formulario.lastname.value = lastname1;
+			    formulario.email.value = email1; 
+			    formulario.id.value = id1;
+			   
+			    var action = document.getElementById('action') 
+			    action.value = 'update';
 		}
 
 
@@ -294,15 +306,53 @@
 		    if(password!=password2){
 		      swal("Las contraseñas no coinciden", " ", "error");
 		      $('#password').addClass('is-invalid');
-		      $('#password2').addClass('is-invalid');
+		      $('#password2').addClass('is-invalid');	      
 		      return false;
-
     		}else{
-
+    			 
     			return true;
     		}  
     
-  }
+  		}
+
+  		function remove(id1,target)
+		  {
+		    swal({
+		      title: "¿Desea eliminar el registro?",
+		      text: "Una vez eliminado, no podrá recuperar el reigstro",
+		      icon: "warning",
+		      buttons: true,
+		      dangerMode: true,
+		    })
+		    .then((willDelete) => {
+		      if (willDelete) { 
+
+		        $.ajax({ 
+		          url : '<?= BASE_PATH ?>user', 
+		          data : { action : 'delete',id:id1}, 
+		          type : 'POST', 
+		          dataType : 'json', 
+		          success : function(respuesta) {
+		            if (respuesta.code>0) {
+		              //$(target).parent().parent().parent().parent().parent().remove();
+		              swal(respuesta.message, { icon: "success", });
+		            }else{
+		              swal(respuesta.message, { icon: "error", }); 
+		            }
+		          }, 
+		          error : function(xhr, status) {
+		            console.log(xhr)
+		            console.log(status)
+		              swal(respuesta.message, { icon: "error", }); 
+		          }
+		        }); 
+
+		      } else {
+		        swal("","El registro no se ha eliminado","error");
+		      }
+		    });
+		    console.log(id1)
+		  }
 		
 	</script>
 
