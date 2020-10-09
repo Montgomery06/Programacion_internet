@@ -64,7 +64,7 @@
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div> 
-		      <form method="Post" onsubmit="return validateRegister()" id="usuario" name="usuario">
+		      <form action="user" method="Post" onsubmit="return validateRegister()" id="usuario" name="usuario">
 		      <div class="modal-body">
 
 		      	<label for="basic-url">Nombre</label>
@@ -114,8 +114,9 @@
 
 
 				<div class="modal-footer">
+					 <input type="hidden" name="token" id="token" value="<?= $_SESSION['token'] ?>">
 					 <input type="hidden" name="action" id="action" value="add">
-					 <input type="hidden" name="id" id="id" value="">
+					 <input type="hidden" name="id" id="id"  value="">
        				 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
     			    <button type="submit" class="btn btn-primary">Guardar</button>
      			 </div>
@@ -328,8 +329,8 @@
 		      if (willDelete) { 
 
 		        $.ajax({ 
-		          url : '<?= BASE_PATH ?>user', 
-		          data : { action : 'delete',id:id1}, 
+		          url : 'user', 
+		          data : { action : 'delete',id:id1,token:"<?= $_SESSION['token'] ?>"}, 
 		          type : 'POST', 
 		          dataType : 'json', 
 		          success : function(respuesta) {

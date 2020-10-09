@@ -7,6 +7,8 @@ include_once "connectionController.php";
 
 if (isset($_POST['action'])) {
 
+			if ( $_POST['token'] == $_SESSION['token']) {
+
 			$userController = new UserController();
 
 			switch ($_POST['action']) {
@@ -44,6 +46,8 @@ if (isset($_POST['action'])) {
 					
 				break; 
 		}
+
+	}
 }
 
 
