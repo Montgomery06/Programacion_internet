@@ -1,0 +1,21 @@
+[{
+	        "title": "Pelicula 1",
+            "clasification": "A",
+            "minutes": "131",
+            "year": "2014",
+            "description": "",
+            "cover": "movie.png",
+            "trailer": "",
+            "categorie_id": "1"
+},
+
+{
+		    "title": "Pelicula 2",
+            "clasification": "A",
+            "minutes": "131",
+            "year": "2014",
+            "description": "",
+            "cover": "movie.png",
+            "trailer": "",
+            "categorie_id": "1"
+}]
