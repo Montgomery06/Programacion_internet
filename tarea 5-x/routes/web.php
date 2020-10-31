@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,13 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/contact', 'WebController@contact');
+Route::get('/contact','WebController@contact');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
 Route::middleware(['auth'])->group(function(){
-	Route::get('/movies','MovieController@index');
+
+
+	Route::get('/movies','MovieController@index')->name('movies');
+	Route::get('/categories','CategoryController@index');
 
 });

@@ -8,35 +8,31 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-              
-               
-
-               <table class="table table-striped table-bordered">
-				  <thead class="thead-dark">
+				<table class="table table-striped table-bordered">
+				  <thead class="thead-dark ">
 				    <tr>
 				      <th scope="col">#</th>
 				      <th scope="col">Title</th>
-				      <th scope="col">Clasification</th>
+				      <th scope="col">Classification</th>
 				      <th scope="col">Category</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	@if(isset($movies) && count($movies)>0)
-				  	@foreach ($movies as $movie)			    
+				  	@if (isset($movies) && count($movies)>0)
+				  	@foreach ($movies as $movie)
 				  	<tr>
 				      <th scope="row">
-				      	{{$movie-> id}}
+				      	{{ $movie->id }}
 				      </th>
-				      <td>{{$movie-> title}}</td>
-				      <td>{{$movie-> clasification}}</td>
-				      <td>{{$movie-> categorie_id}}</td>
-				    </tr>
-				    @endforeach
-				  	@endif
+				      <td> {{ $movie->title }} </td>
+				      <td> {{ $movie->classification }} </td>
+				      <td> {{ $movie->category->name }} </td>
+				    </tr> 
+				  	@endforeach
+				  	@endif 
 				  </tbody>
 				</table>
-
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-app-layout> 
