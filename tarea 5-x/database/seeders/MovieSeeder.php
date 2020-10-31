@@ -14,21 +14,19 @@ class MovieSeeder extends Seeder
      */
     public function run()
     {
-    	$movies = json_decode(file_get_contents("database/jsons/movie.json"),true);
+        $movies = json_decode(file_get_contents("database/jsons/movies.json"),true);
 
-    	foreach ($movies as $movieA) {
-    		$movie = new Movie();
-    		$movie->title = $movieA["title"]; 
-    		$movie->clasification = $movieA["clasification"];
-    		$movie->minutes = $movieA["minutes"];
-    		$movie->year = $movieA["year"];
-    		$movie->description = $movieA["description"];
-    		$movie->cover = $movieA["cover"];
-    		$movie->trailer = $movieA["trailer"];
-    		$movie->categorie_id = $movieA["categorie_id"];
-    		$movie->save();
-    	}
-
-        //
+        foreach ($movies as $movieA) {
+        	$movie = new Movie();
+        	$movie->title = $movieA['title'];
+			$movie->description = $movieA['description'];
+			$movie->classification = $movieA['classification'];
+			$movie->minutes = $movieA['minutes'];
+			$movie->year = $movieA['year'];
+			$movie->cover = $movieA['cover'];
+			$movie->trailer = $movieA['trailer'];
+			$movie->category_id = $movieA['category_id'];
+			$movie->save();
+        }
     }
 }
