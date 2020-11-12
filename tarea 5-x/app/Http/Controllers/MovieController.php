@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,10 @@ class MovieController extends Controller
     public function index()
     {
         #$movies = Movie::where('category_id',4)->get();
-        $movies = Movie::with('category')->get(); 
+        $movies = Movie::with('category')->get();
+        $categories = Category::all(); 
 
-        return view('movies.index',compact('movies'));
+        return view('movies.index',compact('movies','categories'));
     }
 
     /**
@@ -38,6 +40,26 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        if ($movie = Movie::create($request->all())) {
+            
+            if ($request->hasFile('cover_file')) {
+
+                $file = $request->file('cover_file');
+                $file_name = 'cover_movie'.$movie->id.'.'.$file->getClientOriginalExtension();
+
+                $path = $request->file('cover_file')->storeAs(
+                    'img', $file_name
+                );
+
+                $movie->cover = $file_name;
+                $movie->save();
+
+
+            }
+
+            return redirect()->back();
+        }
+        return redirect()->back();
         //
     }
 
