@@ -53,7 +53,7 @@
 						    </button>
 						    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 						      <a onclick="edit({{ $category->id }},'{{ $category->name }}','{{ $category->description }}')" data-toggle="modal" data-target="#editCategory" class="dropdown-item" href="#">
-						      	Editar
+						      	Edit
 						      </a>
 						       <a onclick="remove({{ $category->id }})"  class="dropdown-item" href="#">
 						      	Remove
