@@ -11,10 +11,11 @@
         </h2>
      <?php $__env->endSlot(); ?>
 
+    <?php if(Auth::user()->hasRole('Admin') ): ?>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.welcome','data' => []]); ?>
 <?php $component->withName('jet-welcome'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -29,6 +30,13 @@
             </div>
         </div>
     </div>
+
+    <?php else: ?>
+
+    <h1>Hola</h1>
+
+    <?php endif; ?>
+    
  <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
